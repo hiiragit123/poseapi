@@ -9,14 +9,16 @@ from enum import Enum
 app = FastAPI()
 pose_app = main.pose_app()
 class PredictName(str,Enum):
-    Point = "Point"
+    Notation1 = "Notation1"
 
 @app.post('/api/{predict_object}')
-async def judge_image(predict_object:PredictName, files: List[UploadFile] = File(...)):
-    ans = await files[0].read()
-    input = await files[1].read()
-    ans = np.fromstring(ans,np.uint8)
+async def judge_image(predict_object:PredictName, file: UploadFile = File(...)):
+    input = await file.read()
+    #ans = np.fromstring(ans,np.uint8)
     input = np.fromstring(input,np.uint8)
+    if predict_object.value == "Notation1":
+        ans = "ans/test1.png"
+
     ai,ii = pose_app.get_image(ans,input)
     ap,ip = pose_app.get_pose(ai,ii)
     dist = pose_app.get_dist(ap,ip)
