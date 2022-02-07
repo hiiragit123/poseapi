@@ -11,7 +11,7 @@ class pose_app:
         min_detection_confidence=0.5)
     
     def get_image(self,ans,input):
-        ans_image = cv2.read(ans)
+        ans_image = cv2.imread(ans)
         input_image = cv2.imdecode(input, cv2.IMREAD_COLOR)
         ans_image = cv2.cvtColor(ans_image,cv2.COLOR_BGR2RGB)
         input_image = cv2.cvtColor(input_image,cv2.COLOR_BGR2RGB)

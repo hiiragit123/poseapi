@@ -18,7 +18,6 @@ async def judge_image(predict_object:PredictName, file: UploadFile = File(...)):
     input = np.fromstring(input,np.uint8)
     if predict_object.value == "Notation1":
         ans = "ans/test1.png"
-
     ai,ii = pose_app.get_image(ans,input)
     ap,ip = pose_app.get_pose(ai,ii)
     dist = pose_app.get_dist(ap,ip)
